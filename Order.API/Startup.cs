@@ -62,10 +62,10 @@ namespace Order.API
             {
                 app.UseDeveloperExceptionPage();
             }
+            app.UseAuthentication();
             app.UseMvc();
 
             app.UseSwaggerUi3WithApiExplorer(settings => { settings.GeneratorSettings.DefaultPropertyNameHandling = PropertyNameHandling.CamelCase; });
-            app.Run(async context => { context.Response.Redirect("/swagger"); });
         }
     }
 }

@@ -27,7 +27,7 @@ namespace Order.API.Controllers.Items
             _itemMapper = Mapper;
         }
 
-        [AllowAnonymous]
+        [Authorize(Policy = "MustBeCostumer")]
         [HttpGet]
         public ActionResult<List<ItemDTO>> GetAllItems()
         {

@@ -36,9 +36,9 @@ namespace Order.API.Helpers
         {
             if (!Request.Headers.ContainsKey("Authorization"))
             {
-                _logger.LogError(Guid.NewGuid() + " Missing Authorization Header");
-
-                return AuthenticateResult.Fail(Guid.NewGuid() + " Missing Authorization Header");
+                var id = Guid.NewGuid();
+                _logger.LogError(id + " Missing Authorization Header");
+                return AuthenticateResult.Fail(id + " Missing Authorization Header");
             }
 
             Costumer costumer = null;
@@ -60,9 +60,9 @@ namespace Order.API.Helpers
 
             if (costumer == null)
             {
-                _logger.LogError(Guid.NewGuid() + " Invalid Username or Password");
-
-                return AuthenticateResult.Fail(Guid.NewGuid() + " Invalid Username or Password");
+                var id = Guid.NewGuid();
+                _logger.LogError(id + " Invalid Username or Password");
+                return AuthenticateResult.Fail(id + " Invalid Username or Password");
             }
 
             var claims = new List<Claim> {

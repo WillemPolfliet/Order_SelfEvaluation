@@ -26,7 +26,6 @@ namespace Order.API.Controllers.Costumers
             _costumerMapper = Mapper;
         }
 
-
         [Authorize(Policy = "MustBeAdmin")]
         [HttpGet]
         public ActionResult<List<CostumerDTO>> GetAllCostumers()
