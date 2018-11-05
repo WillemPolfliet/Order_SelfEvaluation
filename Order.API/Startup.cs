@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Builder;
+﻿using Microsoft.AspNetCore.Authentication;
+using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.AspNetCore.Mvc;
@@ -12,6 +13,7 @@ using Order.API.Controllers.Costumers.Mapper;
 using Order.API.Controllers.Costumers.Mapper.Interface;
 using Order.API.Controllers.Items.Mapper;
 using Order.API.Controllers.Items.Mapper.Interface;
+using Order.API.Helpers;
 using Order.Services.CostumerServices;
 using Order.Services.CostumerServices.Interfaces;
 using Order.Services.ItemServices;
@@ -37,6 +39,13 @@ namespace Order.API
         {
             services.AddSwagger();
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
+
+            services.AddAuthentication("BasicAuthentication").AddScheme<AuthenticationSchemeOptions, BasicAuthenticationHandler>("BasicAuthentication", null);
+            services.AddAuthorization(options =>
+            {
+                options.AddPolicy("MustBeCostumer", policy => policy.RequireRole("COSTUMER", "ADMIN"));
+                options.AddPolicy("MustBeAdmin", policy => policy.RequireRole("ADMIN"));
+            });
 
 
             services.AddSingleton<ICostumerService, CostumerService>();

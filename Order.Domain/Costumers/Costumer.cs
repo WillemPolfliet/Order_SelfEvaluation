@@ -31,12 +31,12 @@ namespace Order.Domain.Costumers
             Address = address;
             Phonenumber = phonenumber;
             Password = CheckPassword(password);
-            Role = EnumRoles.costumer;
+            Role = EnumRoles.COSTUMER;
         }
 
         public static Costumer ChangeRoleToAdmin(Costumer costumer)
         {
-            costumer.Role = EnumRoles.admin;
+            costumer.Role = EnumRoles.ADMIN;
             return costumer;
         }
 

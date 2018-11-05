@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Text;
+using System.Threading.Tasks;
 
 namespace Order.Services.CostumerServices.Interfaces
 {
@@ -9,5 +10,6 @@ namespace Order.Services.CostumerServices.Interfaces
     {
         void Register(Costumer newCostumer);
         List<Costumer> GetAllCostumers();
+        Task<Costumer> Authenticate(string username, string password);
     }
 }

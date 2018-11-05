@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Order.API.Controllers.Costumers.Mapper.DTO;
 using Order.API.Controllers.Costumers.Mapper.Interface;
@@ -11,6 +12,7 @@ using System.Threading.Tasks;
 
 namespace Order.API.Controllers.Costumers
 {
+    [Authorize]
     [Route("api/[controller]")]
     [ApiController]
     public class CostumerController : ControllerBase
@@ -25,12 +27,14 @@ namespace Order.API.Controllers.Costumers
         }
 
 
+        [Authorize(Policy = "MustBeAdmin")]
         [HttpGet]
         public ActionResult<List<CostumerDTO>> GetAllCostumers()
         {
             return Ok(_costumerMapper.ListOfCustomersToDTO(_costumerService.GetAllCostumers()));
         }
 
+        [AllowAnonymous]
         [HttpPost]
         public ActionResult RegisterCostumer([FromBody]RegisteringNewCostumerDTO givenCostumer)
         {

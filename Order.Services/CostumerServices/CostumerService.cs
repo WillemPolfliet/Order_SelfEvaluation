@@ -6,11 +6,22 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Threading.Tasks;
 
 namespace Order.Services.CostumerServices
 {
     public class CostumerService : ICostumerService
     {
+        public async Task<Costumer> Authenticate(string username, string password)
+        {
+            var costumer = await Task.Run(() => CustomerDatabase.CostumerDB.SingleOrDefault(CostumerToLogin => CostumerToLogin.Email == username && CostumerToLogin.Password == password));
+
+            if (costumer == null)
+            { return null; }
+
+            return costumer;
+        }
+
         public List<Costumer> GetAllCostumers()
         {
             return CustomerDatabase.CostumerDB;

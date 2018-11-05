@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Order.API.Controllers.Items.Mapper.DTO;
 using Order.API.Controllers.Items.Mapper.Interface;
@@ -11,6 +12,7 @@ using System.Threading.Tasks;
 
 namespace Order.API.Controllers.Items
 {
+    [Authorize]
     [Route("api/[controller]")]
     [ApiController]
     public class ItemController : ControllerBase
@@ -25,13 +27,14 @@ namespace Order.API.Controllers.Items
             _itemMapper = Mapper;
         }
 
-
+        [AllowAnonymous]
         [HttpGet]
         public ActionResult<List<ItemDTO>> GetAllItems()
         {
             return Ok(_itemMapper.ListOfCustomersToDTO(_itemService.GetAllItems()));
         }
 
+        [Authorize(Policy = "MustBeAdmin")]
         [HttpPost]
         public ActionResult AddNewItem([FromBody]AddNewItemDTO givenItem)
         {

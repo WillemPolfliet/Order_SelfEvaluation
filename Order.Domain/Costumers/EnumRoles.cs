@@ -6,7 +6,7 @@ namespace Order.Domain.Costumers
 {
     public enum EnumRoles
     {
-        costumer,
-        admin
+        COSTUMER,
+        ADMIN
     }
 }
