@@ -20,6 +20,7 @@ namespace Order.Services.Tests.CostumerServices
             CustomerDatabase.CostumerDB.Clear();
             var temp = new List<Costumer>()
                 {
+                    Costumer.ChangeRoleToAdmin(new Costumer("Admin", "Polfliet",  "Admin@polfliet.com",  "159159159","Azerty123", new Adderss("hier","8","btown","3350"))),
                     new Costumer("Willem", "Polfliet",  "Willem@polfliet.com",  "159159159","Azerty123", new Adderss("hier","8","btown","3350")),
                     new Costumer("Melliw", "Teilflop",  "Melliw@Teilflop.com",  "951951951","Azerty123",new Adderss("hier","8","btown","3350")),
                     new Costumer("Shani", "Decoster",  "Shani@Decoster.com",  "753753753","Azerty123",new Adderss("hier","8","btown","3350")),

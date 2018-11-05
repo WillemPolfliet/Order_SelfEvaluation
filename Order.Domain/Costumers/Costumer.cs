@@ -34,15 +34,16 @@ namespace Order.Domain.Costumers
             Role = EnumRoles.costumer;
         }
 
-        public static void ChangeRoleToAdmin(Costumer costumer)
+        public static Costumer ChangeRoleToAdmin(Costumer costumer)
         {
             costumer.Role = EnumRoles.admin;
+            return costumer;
         }
 
         private void CheckValidInput(string password, string firstname, string lastName, string email, Adderss address, string phonenumber)
         {
-            if (password == string.Empty || email == string.Empty || firstname == string.Empty || lastName == string.Empty || phonenumber == string.Empty ||
-                address.StreetNumber == string.Empty || address.PostalArea == string.Empty || address.PostalNumber == string.Empty || address.StreetName == string.Empty)
+            if (string.IsNullOrEmpty(password) || string.IsNullOrEmpty(email) || string.IsNullOrEmpty(firstname) || string.IsNullOrEmpty(lastName) || string.IsNullOrEmpty(phonenumber) ||
+                 string.IsNullOrEmpty(address.StreetNumber) || string.IsNullOrEmpty(address.PostalArea) || string.IsNullOrEmpty(address.PostalNumber) || string.IsNullOrEmpty(address.StreetName))
             {
                 throw new CostumerException("Some fields are missing");
             }

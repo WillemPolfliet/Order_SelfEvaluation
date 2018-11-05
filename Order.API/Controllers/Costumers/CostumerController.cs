@@ -26,7 +26,7 @@ namespace Order.API.Controllers.Costumers
 
 
         [HttpGet]
-        public ActionResult<List<CostumerDTO>> GetAllBooks()
+        public ActionResult<List<CostumerDTO>> GetAllCostumers()
         {
             return Ok(_costumerMapper.ListOfCustomersToDTO(_costumerService.GetAllCostumers()));
         }
