@@ -13,6 +13,7 @@ namespace Order.API.Controllers.Costumers.Mapper.DTO
         public string Email { get; set; }
         public string Password { get; set; }
         public string Phonenumber { get; set; }
+        public string Role { get; set; }
 
         public string AddressStreetName { get; set; }
         public string AddressStreetNumber { get; set; }

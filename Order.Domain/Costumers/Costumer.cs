@@ -18,6 +18,7 @@ namespace Order.Domain.Costumers
         public Adderss Address { get; private set; }
         public string Phonenumber { get; private set; }
         public string Password { get; private set; }
+        public EnumRoles Role { get; set; }
 
         public Costumer(string firstname, string lastName, string email, string phonenumber, string password, Adderss address)
         {
@@ -30,6 +31,12 @@ namespace Order.Domain.Costumers
             Address = address;
             Phonenumber = phonenumber;
             Password = CheckPassword(password);
+            Role = EnumRoles.costumer;
+        }
+
+        public static void ChangeRoleToAdmin(Costumer costumer)
+        {
+            costumer.Role = EnumRoles.admin;
         }
 
         private void CheckValidInput(string password, string firstname, string lastName, string email, Adderss address, string phonenumber)

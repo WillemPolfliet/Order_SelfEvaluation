@@ -20,6 +20,7 @@ namespace Order.API.Controllers.Costumers.Mapper
                 Email = givenCostumer.Email,
                 Password = givenCostumer.Password,
                 Phonenumber = givenCostumer.Phonenumber,
+                Role = givenCostumer.Role.ToString(),
                 AddressStreetName = givenCostumer.Address.StreetName,
                 AddressStreetNumber = givenCostumer.Address.StreetNumber,
                 AddressPostalArea = givenCostumer.Address.PostalArea,
