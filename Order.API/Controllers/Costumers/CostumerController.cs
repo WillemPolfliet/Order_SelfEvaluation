@@ -32,7 +32,7 @@ namespace Order.API.Controllers.Costumers
         }
 
         [HttpPost]
-        public ActionResult RegisterCostumer([FromBody]CostumerDTO givenCostumer)
+        public ActionResult RegisterCostumer([FromBody]RegisteringNewCostumerDTO givenCostumer)
         {
             try
             {

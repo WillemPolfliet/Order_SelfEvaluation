@@ -5,9 +5,8 @@ using System.Threading.Tasks;
 
 namespace Order.API.Controllers.Costumers.Mapper.DTO
 {
-    public class CostumerDTO
+    public class RegisteringNewCostumerDTO
     {
-        public string GUID { get; set; }
         public string Firstname { get; set; }
         public string LastName { get; set; }
         public string Email { get; set; }

@@ -14,22 +14,33 @@ namespace Order.API.Controllers.Costumers.Mapper
         {
             return new CostumerDTO()
             {
+                GUID = givenCostumer.Id.ToString(),
                 Firstname = givenCostumer.Firstname,
                 LastName = givenCostumer.LastName,
                 Email = givenCostumer.Email,
-                Address = givenCostumer.Address,
-                Phonenumber = givenCostumer.Phonenumber
+                Password = givenCostumer.Password,
+                Phonenumber = givenCostumer.Phonenumber,
+                AddressStreetName = givenCostumer.Address.StreetName,
+                AddressStreetNumber = givenCostumer.Address.StreetNumber,
+                AddressPostalArea = givenCostumer.Address.PostalArea,
+                AddressPostalCode = givenCostumer.Address.PostalNumber
             };
         }
 
-        public Costumer DTOToCostumer(CostumerDTO givenCostumerDTO)
+        public Costumer DTOToCostumer(RegisteringNewCostumerDTO givenCostumerDTO)
         {
             return new Costumer(
                 givenCostumerDTO.Firstname,
                 givenCostumerDTO.LastName,
                 givenCostumerDTO.Email,
-                givenCostumerDTO.Address,
-                givenCostumerDTO.Phonenumber
+                givenCostumerDTO.Phonenumber,
+                givenCostumerDTO.Password,
+                new Adderss(
+                    givenCostumerDTO.AddressStreetName,
+                    givenCostumerDTO.AddressStreetNumber,
+                    givenCostumerDTO.AddressPostalArea,
+                    givenCostumerDTO.AddressPostalCode
+                )
             );
         }
 
