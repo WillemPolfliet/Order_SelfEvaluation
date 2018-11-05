@@ -15,8 +15,6 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{4C8F6D36
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Order.API.Tests", "Order.API.Tests\Order.API.Tests.csproj", "{18E2653F-2B46-4112-B6CA-26A6CA141C80}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Order.Domain.Tests", "ORder.Domain.Tests\Order.Domain.Tests.csproj", "{70B9AABA-680B-4D36-82A8-008682E9CD8E}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Order.Services.Tests", "Order.Service.Tests\Order.Services.Tests.csproj", "{A08A30D2-8A2D-4E22-ADED-F29617CF2491}"
 EndProject
 Global
@@ -45,10 +43,6 @@ Global
 		{18E2653F-2B46-4112-B6CA-26A6CA141C80}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{18E2653F-2B46-4112-B6CA-26A6CA141C80}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{18E2653F-2B46-4112-B6CA-26A6CA141C80}.Release|Any CPU.Build.0 = Release|Any CPU
-		{70B9AABA-680B-4D36-82A8-008682E9CD8E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{70B9AABA-680B-4D36-82A8-008682E9CD8E}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{70B9AABA-680B-4D36-82A8-008682E9CD8E}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{70B9AABA-680B-4D36-82A8-008682E9CD8E}.Release|Any CPU.Build.0 = Release|Any CPU
 		{A08A30D2-8A2D-4E22-ADED-F29617CF2491}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{A08A30D2-8A2D-4E22-ADED-F29617CF2491}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{A08A30D2-8A2D-4E22-ADED-F29617CF2491}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -59,7 +53,6 @@ Global
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
 		{18E2653F-2B46-4112-B6CA-26A6CA141C80} = {4C8F6D36-7027-4B3E-8530-D148F7C485BC}
-		{70B9AABA-680B-4D36-82A8-008682E9CD8E} = {4C8F6D36-7027-4B3E-8530-D148F7C485BC}
 		{A08A30D2-8A2D-4E22-ADED-F29617CF2491} = {4C8F6D36-7027-4B3E-8530-D148F7C485BC}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution

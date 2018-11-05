@@ -19,7 +19,6 @@ namespace Order.Services.CostumerServices
         public void Register(Costumer newCostumer)
         {
             var doesCostumerMailExist = CustomerDatabase.CostumerDB.Any(DBCostumer => DBCostumer.Email == newCostumer.Email);
-
             if (doesCostumerMailExist)
             { throw new CostumerException("The costumer Email is already used. no duplicated is possible"); }
 

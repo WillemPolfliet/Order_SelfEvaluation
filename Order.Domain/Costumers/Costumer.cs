@@ -17,12 +17,22 @@ namespace Order.Domain.Costumers
 
         public Costumer(string firstname, string lastName, string email, string address, string phonenumber)
         {
+            CheckValidInput(firstname, lastName, email, address, phonenumber);
+
             Id = Guid.NewGuid();
             Firstname = firstname;
             LastName = lastName;
             Email = CheckEmail(email);
             Address = address;
             Phonenumber = phonenumber;
+        }
+
+        private void CheckValidInput(string firstname, string lastName, string email, string address, string phonenumber)
+        {
+            if (email == string.Empty || firstname == string.Empty || lastName == string.Empty || address == string.Empty || phonenumber == string.Empty)
+            {
+                throw new CostumerException("Some fields are missing");
+            }
         }
 
         private string CheckEmail(string email)
