@@ -28,8 +28,8 @@ namespace Order.Domain.Items
         {
             if (string.IsNullOrEmpty(name) || string.IsNullOrEmpty(description))
             { throw new ItemException("All fields are required"); }
-            if (amount <= 0)
-            { throw new ItemException("The amount cannot be zero or less"); }
+            if (amount < 0)
+            { throw new ItemException("The amount cannot be negative"); }
             if (price < 0)
             { throw new ItemException("The price cannot be negative"); }
         }
