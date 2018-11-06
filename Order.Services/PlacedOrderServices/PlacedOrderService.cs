@@ -1,5 +1,6 @@
 ﻿using Order.Database;
 using Order.Domain.Costumers;
+using Order.Domain.Costumers.Exceptions;
 using Order.Domain.Items;
 using Order.Domain.PlacedOrders;
 using Order.Domain.PlacedOrders.Exceptions;
@@ -16,6 +17,7 @@ namespace Order.Services.PlacedOrderServices
         public void RegisterNewOrder(Dictionary<Guid, int> allGivenItemsAndAmount, Guid givenCostumerID)
         {
             var DictionaryWithItemObject = GetDictionaryWithItemObject(allGivenItemsAndAmount);
+            CheckCostumerID(givenCostumerID);
 
             PlacedOrder newOrder = new PlacedOrder(DictionaryWithItemObject, givenCostumerID);
             PlacedOrderDatabase.OrderDB.Add(newOrder);
@@ -26,6 +28,15 @@ namespace Order.Services.PlacedOrderServices
                 { item.Key.Amount = 0; }
                 else
                 { item.Key.Amount -= item.Value; }
+            }
+        }
+
+        private void CheckCostumerID(Guid givenCostumerID)
+        {
+            var Excist = Database.CustomerDatabase.CostumerDB.Any(costumer => costumer.Id == givenCostumerID);
+            if (!Excist)
+            {
+                throw new CostumerException("Costumer cannot be found");
             }
         }
 
