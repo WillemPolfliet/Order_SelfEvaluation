@@ -1,4 +1,5 @@
 ﻿using Order.Database;
+using Order.Database.Exceptions;
 using Order.Domain.Costumers;
 using Order.Domain.Costumers.Exceptions;
 using Order.Services.CostumerServices.Interfaces;
@@ -24,6 +25,10 @@ namespace Order.Services.CostumerServices
 
         public List<Costumer> GetAllCostumers()
         {
+            if (CostumerDatabase.CostumerDB.Count == 0)
+            {
+                throw new DatabaseException("Costumers Database is empty");
+            }
             return CostumerDatabase.CostumerDB;
         }
 

@@ -1,4 +1,5 @@
 ﻿using Order.Database;
+using Order.Database.Exceptions;
 using Order.Domain.Items;
 using Order.Domain.Items.Exceptions;
 using Order.Services.ItemServices.Interfaces;
@@ -18,23 +19,27 @@ namespace Order.Services.ItemServices
 
         public List<Item> GetAllItems()
         {
+            if (ItemDatabase.ItemDB.Count == 0)
+            {
+                throw new DatabaseException("Items Database is empty");
+            }
             return ItemDatabase.ItemDB;
         }
 
         public void UpdateItem(Guid itemGuidID, Item givenItem)
         {
+            var itemToUpdate = ItemDatabase.ItemDB.SingleOrDefault(itemFromDB => itemFromDB.Id == itemGuidID);
+            if (itemToUpdate == null)
+            { throw new ItemException("Item to update cannot be found."); }
+
             try
             {
-                var itemToUpdate = ItemDatabase.ItemDB.Single(itemFromDB => itemFromDB.Id == itemGuidID);
                 ItemDatabase.ItemDB.Remove(itemToUpdate);
                 itemToUpdate.UpdateItemWithGivenItem(givenItem);
                 ItemDatabase.ItemDB.Add(itemToUpdate);
-
             }
             catch
-            {
-                throw new ItemException("Item to update cannot be found.");
-            }
+            { throw new ItemException("Cannot update item."); }
         }
     }
 }

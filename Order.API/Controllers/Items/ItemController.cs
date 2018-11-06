@@ -31,7 +31,15 @@ namespace Order.API.Controllers.Items
         [HttpGet]
         public ActionResult<List<ItemDTO>> GetAllItems()
         {
-            return Ok(_itemMapper.ListOfCustomersToDTO(_itemService.GetAllItems()));
+            try
+            {
+                var result = _itemMapper.ListOfCustomersToDTO(_itemService.GetAllItems());
+                return Ok(result);
+            }
+            catch (ItemException ItemEx)
+            { return BadRequest(ItemEx.Message); }
+            catch (Exception ex)
+            { return BadRequest(ex.Message); }
         }
 
         [Authorize(Policy = "MustBeAdmin")]
