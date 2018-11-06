@@ -45,8 +45,19 @@ namespace Order.API.Controllers.PlacedOrders.Mapper
             };
         }
 
+        public List<ItemGroup> DTOToItemGroup(List<NewItemGroupDTO> ListOfDTOs)
+        {
+            List<ItemGroup> DTOList = new List<ItemGroup>();
 
+            foreach (var item in ListOfDTOs)
+            { DTOList.Add(ItemGRoupDTOToItemGroup(item)); }
 
+            return DTOList;
+        }
 
+        public ItemGroup ItemGRoupDTOToItemGroup(NewItemGroupDTO item)
+        {
+            return new ItemGroup(item.ItemID, item.ItemAmount);
+        }
     }
 }

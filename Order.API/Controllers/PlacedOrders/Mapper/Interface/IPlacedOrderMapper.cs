@@ -11,6 +11,7 @@ namespace Order.API.Controllers.PlacedOrders.Mapper.Interface
     {
         List<PlacedOrderDTO> ListOfPlacedOrdersToDTO(List<PlacedOrder> givenListOfOrders);
         PlacedOrderDTO OrderToPlacedOrderDTO(PlacedOrder givenOrder);
-
+        List<ItemGroup> DTOToItemGroup(List<NewItemGroupDTO> ListOfDTOs);
+        ItemGroup ItemGRoupDTOToItemGroup(NewItemGroupDTO item);
     }
 }

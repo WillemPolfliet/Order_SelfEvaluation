@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Order.API.Controllers.PlacedOrders.Mapper.DTO;
 using Order.API.Controllers.PlacedOrders.Mapper.Interface;
+using Order.Domain.PlacedOrders.Exceptions;
 using Order.Services.PlacedOrderServices.Interfaces;
 using System;
 using System.Collections.Generic;
@@ -34,25 +35,36 @@ namespace Order.API.Controllers.PlacedOrders
         }
 
         [Authorize(Policy = "MustBeCostumer")]
-        [HttpPost]
-        public ActionResult RegisterANewOrder([FromBody] NewPlacedOrderDTO newOrder)
+        [HttpGet]
+        [Route("{CostumerGuid}")]
+        public ActionResult<List<PlacedOrderDTO>> GetReportOfAllOrders([FromRoute] Guid CostumerGuid)
         {
-            Dictionary<Guid, int> dict = new Dictionary<Guid, int>();
-            foreach (var item in newOrder.Order_ItemIDAndAmount)
-            { dict.Add(item.ItemID, item.ItemAmount); }
             try
             {
-                _placedOrderService.RegisterNewOrder(dict, newOrder.givenCostumer);
-            }
-            catch (Exception ex)
-            {
-                return BadRequest(ex.Message);
-            }
+                var result = _placedOrderMapper.ListOfPlacedOrdersToDTO(_placedOrderService.GetAllOrders(CostumerGuid));
 
-            return Ok();
+                return Ok(result);
+            }
+            catch (PlacedOrderException PlacedEx)
+            { return BadRequest(PlacedEx.Message); }
+            catch (Exception ex)
+            { return BadRequest(ex.Message); }
 
         }
 
+        [Authorize(Policy = "MustBeCostumer")]
+        [HttpPost]
+        public ActionResult RegisterANewOrder([FromBody] NewPlacedOrderDTO newOrder)
+        {
+            try
+            {
+                _placedOrderService.RegisterNewOrder(_placedOrderMapper.DTOToItemGroup(newOrder.Order_ItemIDAndAmount), newOrder.givenCostumer);
+            }
+            catch (Exception ex)
+            { return BadRequest(ex.Message); }
+
+            return Ok();
+        }
 
 
     }

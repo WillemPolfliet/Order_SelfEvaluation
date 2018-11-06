@@ -28,5 +28,11 @@ namespace Order.Domain.PlacedOrders
             else
             { ShippingDate = orderDate.AddDays(1); }
         }
+        public ItemGroup(Guid itemID, int itemAmount)
+        {
+            ItemID = itemID;
+            ItemAmount = itemAmount;
+        }
+
     }
 }

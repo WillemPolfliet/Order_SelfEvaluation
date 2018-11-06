@@ -11,8 +11,8 @@ namespace Order.Services.PlacedOrderServices.Interfaces
     {
 
 
-        void RegisterNewOrder(Dictionary<Guid, int> allGivenItemsAndAmount, Guid givenCostumerID);
+        void RegisterNewOrder(List<ItemGroup> allGivenItemsAndAmount, Guid givenCostumerID);
         List<PlacedOrder> GetAllOrders();
-
+        List<PlacedOrder> GetAllOrders(Guid costumerGuid);
     }
 }

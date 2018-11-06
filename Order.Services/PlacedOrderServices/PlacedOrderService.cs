@@ -14,9 +14,23 @@ namespace Order.Services.PlacedOrderServices
 {
     public class PlacedOrderService : IPlacedOrderService
     {
-        public void RegisterNewOrder(Dictionary<Guid, int> allGivenItemsAndAmount, Guid givenCostumerID)
+        public void RegisterNewOrder(List<ItemGroup> OrderGroup, Guid givenCostumerID)
         {
-            var DictionaryWithItemObject = GetDictionaryWithItemObject(allGivenItemsAndAmount);
+            Dictionary<Guid, int> dict = new Dictionary<Guid, int>();
+            foreach (var item in OrderGroup)
+            {
+                if (dict.ContainsKey(item.ItemID))
+                {
+                    var dictResult = dict.Single(itemInDict => itemInDict.Key == item.ItemID);
+                    dict.Remove(dictResult.Key);
+                    dict.Add(dictResult.Key, dictResult.Value + item.ItemAmount);
+                }
+                else
+                { dict.Add(item.ItemID, item.ItemAmount); }
+            }
+
+
+            var DictionaryWithItemObject = GetDictionaryWithItemObject(dict);
             CheckCostumerID(givenCostumerID);
 
             PlacedOrder newOrder = new PlacedOrder(DictionaryWithItemObject, givenCostumerID);
@@ -58,6 +72,11 @@ namespace Order.Services.PlacedOrderServices
         public List<PlacedOrder> GetAllOrders()
         {
             return PlacedOrderDatabase.OrderDB;
+        }
+
+        public List<PlacedOrder> GetAllOrders(Guid costumerGuid)
+        {
+            throw new NotImplementedException();
         }
     }
 }
