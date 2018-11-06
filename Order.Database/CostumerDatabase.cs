@@ -5,7 +5,7 @@ using System.Text;
 
 namespace Order.Database
 {
-    public static class CustomerDatabase
+    public static class CostumerDatabase
     {
         public static List<Costumer> CostumerDB = new List<Costumer>()
         {

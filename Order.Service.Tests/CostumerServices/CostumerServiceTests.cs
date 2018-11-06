@@ -17,7 +17,7 @@ namespace Order.Services.Tests.CostumerServices
 
         public CostumerServiceTests()
         {
-            CustomerDatabase.CostumerDB.Clear();
+            CostumerDatabase.CostumerDB.Clear();
             var temp = new List<Costumer>()
                 {
                     Costumer.ChangeRoleToAdmin(new Costumer("Admin", "Polfliet",  "Admin@polfliet.com",  "159159159","Azerty123", new Adderss("hier","8","btown","3350"))),
@@ -26,7 +26,7 @@ namespace Order.Services.Tests.CostumerServices
                     new Costumer("Shani", "Decoster",  "Shani@Decoster.com",  "753753753","Azerty123",new Adderss("hier","8","btown","3350")),
                     new Costumer("Inahs", "Retsoced",  "Inahs@Retsoced.com", "357357357","Azerty123",new Adderss("hier","8","btown","3350")),
                 };
-            CustomerDatabase.CostumerDB.AddRange(temp);
+            CostumerDatabase.CostumerDB.AddRange(temp);
 
             costumerService = new CostumerService();
         }
@@ -36,16 +36,15 @@ namespace Order.Services.Tests.CostumerServices
         {
             var actual = costumerService.GetAllCostumers();
 
-            Assert.Equal(CustomerDatabase.CostumerDB.Count, actual.Count);
+            Assert.Equal(CostumerDatabase.CostumerDB.Count, actual.Count);
         }
-
         [Fact]
         public void givenAListOfCostumers_Happy_WhenRegisterANewCostumer_TheNewCostumerISAddedToTheDB()
         {
             Costumer costumer = new Costumer("test", "test", "test@test.test", "test", "Azerty123", new Adderss("hier", "8", "btown", "3350"));
 
             costumerService.Register(costumer);
-            var check = CustomerDatabase.CostumerDB.Any(DBCostumer => DBCostumer.Email == costumer.Email);
+            var check = CostumerDatabase.CostumerDB.Any(DBCostumer => DBCostumer.Email == costumer.Email);
 
             Assert.True(check);
         }
@@ -99,7 +98,66 @@ namespace Order.Services.Tests.CostumerServices
 
             Assert.Equal("Password must contain at least 8 characters", costumer.Message);
         }
+        [Fact]
+        public void givenLoginPrompt_Happy_WhenAuthenticating_CostumerLoginIsReturned()
+        {
+            string username = "Admin@polfliet.com";
+            string password = "Azerty123";
+            var costumer = CostumerDatabase.CostumerDB.SingleOrDefault(user => user.Email == username);
 
+            var result = costumerService.Authenticate(username, password);
+
+            Assert.True(costumer.Id == result.Result.Id);
+        }
+        [Fact]
+        public void givenLoginPrompt_WhenAuthenticatingWithFakePassword_CostumerLoginIsReturned()
+        {
+            string username = "Admin@polfliet.com";
+            string password = "Azerty1113";
+            var costumer = CostumerDatabase.CostumerDB.SingleOrDefault(user => user.Email == username);
+
+            var result = costumerService.Authenticate(username, password);
+
+            Assert.True(result.Result == null);
+        }
+        [Fact]
+        public void givenLoginPrompt_WhenAuthenticatingWithFakeUsername_CostumerLoginIsReturned()
+        {
+            string username = "An@polfliet.com";
+            string password = "Azerty123";
+            var costumer = CostumerDatabase.CostumerDB.SingleOrDefault(user => user.Email == username);
+
+            var result = costumerService.Authenticate(username, password);
+
+            Assert.True(result.Result == null);
+        }
+        [Fact]
+        public void givenLoginPrompt_WhenAuthenticatingWithFakeUsernameAndPassword_CostumerLoginIsReturned()
+        {
+            string username = "An@polfliet.com";
+            string password = "Azey123";
+            var costumer = CostumerDatabase.CostumerDB.SingleOrDefault(user => user.Email == username);
+
+            var result = costumerService.Authenticate(username, password);
+
+            Assert.True(result.Result == null);
+        }
+        [Fact]
+        public void GivenACostumerGuidID_Happy_WhenGettingSpecificCostumer_CostumerIsReturned()
+        {
+            var GivenCostumerGuid = CostumerDatabase.CostumerDB.Single(costumer => costumer.FirstName == "Admin").Id;
+
+            var result = costumerService.GetSpecificCostumer(GivenCostumerGuid);
+
+            Assert.True(GivenCostumerGuid == result.Id);
+        }
+        [Fact]
+        public void GivenACostumerGuidID_WhenGettingSpecificCostumerWithBadGuid_ExceptionIsThrown()
+        {
+            var costumer = Assert.Throws<CostumerException>(() => costumerService.GetSpecificCostumer(Guid.NewGuid()));
+
+            Assert.Equal("costumer not found", costumer.Message);
+        }
 
     }
 }

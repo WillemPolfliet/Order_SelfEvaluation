@@ -22,7 +22,7 @@ namespace Order.API.Controllers.Costumers.Mapper
             return new CostumerOverViewDTO()
             {
                 GUID = givenCostumer.Id.ToString(),
-                Firstname = givenCostumer.Firstname,
+                Firstname = givenCostumer.FirstName,
                 LastName = givenCostumer.LastName,
                 Email = givenCostumer.Email,
                 Password = givenCostumer.Password,
@@ -64,7 +64,7 @@ namespace Order.API.Controllers.Costumers.Mapper
             return new CostumerDTO()
             {
                 GUID = givenCostumer.Id.ToString(),
-                Name = givenCostumer.Firstname + " " + givenCostumer.LastName,
+                Name = givenCostumer.FirstName + " " + givenCostumer.LastName,
                 Email = givenCostumer.Email,
                 Role = givenCostumer.Role.ToString(),
             };

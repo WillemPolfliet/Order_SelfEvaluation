@@ -47,7 +47,7 @@ namespace Order.Services.PlacedOrderServices
 
         private void CheckCostumerID(Guid givenCostumerID)
         {
-            var Excist = Database.CustomerDatabase.CostumerDB.Any(costumer => costumer.Id == givenCostumerID);
+            var Excist = Database.CostumerDatabase.CostumerDB.Any(costumer => costumer.Id == givenCostumerID);
             if (!Excist)
             {
                 throw new CostumerException("Costumer cannot be found");

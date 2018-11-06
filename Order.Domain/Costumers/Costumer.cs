@@ -12,7 +12,7 @@ namespace Order.Domain.Costumers
         private const int REQUIRED_PASSWORD_LENGTH = 8;
 
         public Guid Id { get; }
-        public string Firstname { get; private set; }
+        public string FirstName { get; private set; }
         public string LastName { get; private set; }
         public string Email { get; private set; }
         public Adderss Address { get; private set; }
@@ -25,7 +25,7 @@ namespace Order.Domain.Costumers
             CheckValidInput(password, firstname, lastName, email, address, phonenumber);
 
             Id = Guid.NewGuid();
-            Firstname = firstname;
+            FirstName = firstname;
             LastName = lastName;
             Email = CheckEmail(email);
             Address = address;

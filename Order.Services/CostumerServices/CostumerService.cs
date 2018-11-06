@@ -14,7 +14,7 @@ namespace Order.Services.CostumerServices
     {
         public async Task<Costumer> Authenticate(string username, string password)
         {
-            var costumer = await Task.Run(() => CustomerDatabase.CostumerDB.SingleOrDefault(CostumerToLogin => CostumerToLogin.Email == username && CostumerToLogin.Password == password));
+            var costumer = await Task.Run(() => CostumerDatabase.CostumerDB.SingleOrDefault(CostumerToLogin => CostumerToLogin.Email == username && CostumerToLogin.Password == password));
 
             if (costumer == null)
             { return null; }
@@ -24,14 +24,14 @@ namespace Order.Services.CostumerServices
 
         public List<Costumer> GetAllCostumers()
         {
-            return CustomerDatabase.CostumerDB;
+            return CostumerDatabase.CostumerDB;
         }
 
         public Costumer GetSpecificCostumer(Guid costumerGuidID)
         {
             try
             {
-                var costumer = CustomerDatabase.CostumerDB.Single(person => person.Id == costumerGuidID);
+                var costumer = CostumerDatabase.CostumerDB.Single(person => person.Id == costumerGuidID);
                 return costumer;
             }
             catch
@@ -40,11 +40,11 @@ namespace Order.Services.CostumerServices
 
         public void Register(Costumer newCostumer)
         {
-            var doesCostumerMailExist = CustomerDatabase.CostumerDB.Any(DBCostumer => DBCostumer.Email == newCostumer.Email);
+            var doesCostumerMailExist = CostumerDatabase.CostumerDB.Any(DBCostumer => DBCostumer.Email == newCostumer.Email);
             if (doesCostumerMailExist)
             { throw new CostumerException("The costumer Email is already used. no duplicated is possible"); }
 
-            CustomerDatabase.CostumerDB.Add(newCostumer);
+            CostumerDatabase.CostumerDB.Add(newCostumer);
         }
     }
 }
