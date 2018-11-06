@@ -10,25 +10,29 @@ namespace Order.API.Controllers.Items.Mapper
 {
     public class ItemMapper : IItemMapper
     {
-        public Item DTOToItem(AddNewItemDTO givenItem)
+        public Item DTOToItem(NewItemDTO givenItemDTO)
         {
             return new Item(
-                givenItem.Name,
-                givenItem.Price,
-                givenItem.Amount,
-                givenItem.Description
+                givenItemDTO.Name,
+                givenItemDTO.Price,
+                givenItemDTO.Amount,
+                givenItemDTO.Description
                 );
         }
 
-        public ItemDTO ItemToDTO(Item givenItemDTO)
+
+
+
+
+        public ItemDTO ItemToDTO(Item givenItem)
         {
             return new ItemDTO()
             {
-                Id = givenItemDTO.Id,
-                Name = givenItemDTO.Name,
-                Price = givenItemDTO.Price,
-                Amount = givenItemDTO.Amount,
-                Description = givenItemDTO.Description
+                Id = givenItem.Id,
+                Name = givenItem.Name,
+                Price = givenItem.Price,
+                Amount = givenItem.Amount,
+                Description = givenItem.Description
             };
         }
 

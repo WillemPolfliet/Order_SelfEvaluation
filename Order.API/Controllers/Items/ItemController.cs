@@ -36,7 +36,7 @@ namespace Order.API.Controllers.Items
 
         [Authorize(Policy = "MustBeAdmin")]
         [HttpPost]
-        public ActionResult AddNewItem([FromBody]AddNewItemDTO givenItem)
+        public ActionResult AddNewItem([FromBody]NewItemDTO givenItem)
         {
             try
             {
@@ -49,5 +49,20 @@ namespace Order.API.Controllers.Items
             { return BadRequest(ex.Message); }
         }
 
+        [Authorize(Policy = "MustBeAdmin")]
+        [HttpPut]
+        [Route("{ItemGuidID}")]
+        public ActionResult UpdateItem([FromRoute] Guid ItemGuidID, [FromBody] NewItemDTO ItemWithUpdateValues)
+        {
+            try
+            {
+                _itemService.UpdateItem(ItemGuidID, _itemMapper.DTOToItem(ItemWithUpdateValues));
+                return Ok();
+            }
+            catch (ItemException ItemEx)
+            { return BadRequest(ItemEx.Message); }
+            catch (Exception ex)
+            { return BadRequest(ex.Message); }
+        }
     }
 }

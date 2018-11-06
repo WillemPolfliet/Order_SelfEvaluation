@@ -33,5 +33,13 @@ namespace Order.Domain.Items
             if (price < 0)
             { throw new ItemException("The price cannot be negative"); }
         }
+
+        public void UpdateItemWithGivenItem(Item givenItem)
+        {
+            Name = givenItem.Name;
+            Description = givenItem.Description;
+            Price = givenItem.Price;
+            Amount = givenItem.Amount;
+        }
     }
 }

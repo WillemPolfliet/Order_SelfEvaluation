@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 
 namespace Order.API.Controllers.Items.Mapper.DTO
 {
-    public class AddNewItemDTO
+    public class NewItemDTO
     {
         public string Name { get; set; }
         public decimal Price { get; set; }

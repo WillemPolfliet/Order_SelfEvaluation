@@ -10,7 +10,7 @@ namespace Order.API.Controllers.Items.Mapper.Interface
     public interface IItemMapper
     {
         List<ItemDTO> ListOfCustomersToDTO(List<Item> givenListOfItems);
-        Item DTOToItem(AddNewItemDTO givenItem);
-        ItemDTO ItemToDTO(Item givenItemDTO);
+        Item DTOToItem(NewItemDTO givenItemDTO);
+        ItemDTO ItemToDTO(Item givenItem);
     }
 }

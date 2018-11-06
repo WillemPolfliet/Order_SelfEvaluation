@@ -9,5 +9,6 @@ namespace Order.Services.ItemServices.Interfaces
     {
         List<Item> GetAllItems();
         void AddNewItem(Item newItem);
+        void UpdateItem(Guid itemGuidID, Item item);
     }
 }
