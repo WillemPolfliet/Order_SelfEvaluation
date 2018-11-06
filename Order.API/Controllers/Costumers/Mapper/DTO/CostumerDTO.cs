@@ -15,9 +15,7 @@ namespace Order.API.Controllers.Costumers.Mapper.DTO
         public string Phonenumber { get; set; }
         public string Role { get; set; }
 
-        public string AddressStreetName { get; set; }
-        public string AddressStreetNumber { get; set; }
-        public string AddressPostalArea { get; set; }
-        public string AddressPostalCode { get; set; }
+        public CostumerAddressDTO Address { get; set; }
+
     }
 }

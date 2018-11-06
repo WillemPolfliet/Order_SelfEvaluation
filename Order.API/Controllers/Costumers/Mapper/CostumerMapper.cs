@@ -12,6 +12,13 @@ namespace Order.API.Controllers.Costumers.Mapper
     {
         public CostumerDTO CostumerToDTO(Costumer givenCostumer)
         {
+            var address = new CostumerAddressDTO()
+            {
+                AddressStreetName = givenCostumer.Address.StreetName,
+                AddressStreetNumber = givenCostumer.Address.StreetNumber,
+                AddressPostalArea = givenCostumer.Address.PostalArea,
+                AddressPostalCode = givenCostumer.Address.PostalNumber
+            };
             return new CostumerDTO()
             {
                 GUID = givenCostumer.Id.ToString(),
@@ -21,12 +28,10 @@ namespace Order.API.Controllers.Costumers.Mapper
                 Password = givenCostumer.Password,
                 Phonenumber = givenCostumer.Phonenumber,
                 Role = givenCostumer.Role.ToString(),
-                AddressStreetName = givenCostumer.Address.StreetName,
-                AddressStreetNumber = givenCostumer.Address.StreetNumber,
-                AddressPostalArea = givenCostumer.Address.PostalArea,
-                AddressPostalCode = givenCostumer.Address.PostalNumber
+                Address = address
             };
         }
+
 
         public Costumer DTOToCostumer(RegisteringNewCostumerDTO givenCostumerDTO)
         {
