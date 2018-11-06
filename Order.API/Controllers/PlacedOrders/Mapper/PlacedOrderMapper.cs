@@ -10,7 +10,7 @@ namespace Order.API.Controllers.PlacedOrders.Mapper
 {
     public class PlacedOrderMapper : IPlacedOrderMapper
     {
-        public List<PlacedOrderDTO> ListOfCustomersToDTO(List<PlacedOrder> givenListOfOrders)
+        public List<PlacedOrderDTO> ListOfPlacedOrdersToDTO(List<PlacedOrder> givenListOfOrders)
         {
             List<PlacedOrderDTO> DTOList = new List<PlacedOrderDTO>();
 
@@ -44,6 +44,9 @@ namespace Order.API.Controllers.PlacedOrders.Mapper
                 TotalPriceOfOrder = givenOrder.TotalPriceOfOrder
             };
         }
+
+
+
 
     }
 }

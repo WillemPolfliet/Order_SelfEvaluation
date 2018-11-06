@@ -30,8 +30,29 @@ namespace Order.API.Controllers.PlacedOrders
         [HttpGet]
         public ActionResult<List<PlacedOrderDTO>> GetAllOrders()
         {
-            return Ok(_placedOrderMapper.ListOfCustomersToDTO(_placedOrderService.GetAllOrders()));
+            return Ok(_placedOrderMapper.ListOfPlacedOrdersToDTO(_placedOrderService.GetAllOrders()));
         }
+
+        [Authorize(Policy = "MustBeCostumer")]
+        [HttpPost]
+        public ActionResult RegisterANewOrder([FromBody] NewPlacedOrderDTO newOrder)
+        {
+            Dictionary<Guid, int> dict = new Dictionary<Guid, int>();
+            foreach (var item in newOrder.Order_ItemIDAndAmount)
+            { dict.Add(item.ItemID, item.ItemAmount); }
+            try
+            {
+                _placedOrderService.RegisterNewOrder(dict, newOrder.givenCostumer);
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
+
+            return Ok();
+
+        }
+
 
 
     }

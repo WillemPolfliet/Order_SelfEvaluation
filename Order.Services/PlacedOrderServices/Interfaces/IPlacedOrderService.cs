@@ -9,7 +9,9 @@ namespace Order.Services.PlacedOrderServices.Interfaces
 {
     public interface IPlacedOrderService
     {
-        void RegisterNewOrder(Dictionary<Item, int> allGivenItemsAndAmount, Costumer givenCostumer);
+
+
+        void RegisterNewOrder(Dictionary<Guid, int> allGivenItemsAndAmount, Guid givenCostumerID);
         List<PlacedOrder> GetAllOrders();
 
     }

@@ -26,13 +26,14 @@ namespace Order.Domain.PlacedOrders
         }
 
 
-        public PlacedOrder(Dictionary<Item, int> allGivenItemsAndAmount, Guid givenCostumer)
+        public PlacedOrder(Dictionary<Item, int> allGivenItemsAndAmount, Guid givenCostumerID)
         {
             OrderId = Guid.NewGuid();
-            CostumerID = givenCostumer;
+            CostumerID = givenCostumerID;
             OrderDate = DateTime.Now.Date;
             DateShipped = null;
 
+            OrderItems = new List<ItemGroup>();
             foreach (var keyValuePair in allGivenItemsAndAmount)
             { OrderItems.Add(new ItemGroup(keyValuePair.Key, keyValuePair.Value, OrderDate)); }
         }

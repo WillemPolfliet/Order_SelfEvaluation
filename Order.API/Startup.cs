@@ -13,11 +13,15 @@ using Order.API.Controllers.Costumers.Mapper;
 using Order.API.Controllers.Costumers.Mapper.Interface;
 using Order.API.Controllers.Items.Mapper;
 using Order.API.Controllers.Items.Mapper.Interface;
+using Order.API.Controllers.PlacedOrders.Mapper;
+using Order.API.Controllers.PlacedOrders.Mapper.Interface;
 using Order.API.Helpers;
 using Order.Services.CostumerServices;
 using Order.Services.CostumerServices.Interfaces;
 using Order.Services.ItemServices;
 using Order.Services.ItemServices.Interfaces;
+using Order.Services.PlacedOrderServices;
+using Order.Services.PlacedOrderServices.Interfaces;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -53,6 +57,9 @@ namespace Order.API
 
             services.AddSingleton<IItemService, ItemService>();
             services.AddSingleton<IItemMapper, ItemMapper>();
+
+            services.AddSingleton<IPlacedOrderService, PlacedOrderService>();
+            services.AddSingleton<IPlacedOrderMapper, PlacedOrderMapper>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

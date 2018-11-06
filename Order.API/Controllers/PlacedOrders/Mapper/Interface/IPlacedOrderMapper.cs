@@ -9,7 +9,7 @@ namespace Order.API.Controllers.PlacedOrders.Mapper.Interface
 {
     public interface IPlacedOrderMapper
     {
-        List<PlacedOrderDTO> ListOfCustomersToDTO(List<PlacedOrder> givenListOfOrders);
+        List<PlacedOrderDTO> ListOfPlacedOrdersToDTO(List<PlacedOrder> givenListOfOrders);
         PlacedOrderDTO OrderToPlacedOrderDTO(PlacedOrder givenOrder);
 
     }
