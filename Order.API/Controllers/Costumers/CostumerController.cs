@@ -30,7 +30,31 @@ namespace Order.API.Controllers.Costumers
         [HttpGet]
         public ActionResult<List<CostumerDTO>> GetAllCostumers()
         {
-            return Ok(_costumerMapper.ListOfCustomersToDTO(_costumerService.GetAllCostumers()));
+            try
+            {
+                var toReturn = _costumerMapper.ListOfCustomersToListDTO(_costumerService.GetAllCostumers());
+                return Ok(toReturn);
+            }
+            catch (CostumerException costumerEx)
+            { return BadRequest(costumerEx.Message); }
+            catch (Exception Ex)
+            { return BadRequest(Ex.Message); }
+        }
+
+        [Authorize(Policy = "MustBeAdmin")]
+        [HttpGet]
+        [Route("{CostumerGuidID}")]
+        public ActionResult<CostumerOverViewDTO> GetSpecificCostumer([FromRoute] Guid CostumerGuidID)
+        {
+            try
+            {
+                var toReturn = _costumerMapper.CostumerToCostumerOverViewDTO(_costumerService.GetSpecificCostumer(CostumerGuidID));
+                return Ok(toReturn);
+            }
+            catch (CostumerException costumerEx)
+            { return BadRequest(costumerEx.Message); }
+            catch (Exception Ex)
+            { return BadRequest(Ex.Message); }
         }
 
         [AllowAnonymous]

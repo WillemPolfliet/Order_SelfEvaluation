@@ -9,8 +9,9 @@ namespace Order.API.Controllers.Costumers.Mapper.Interface
 {
     public interface ICostumerMapper
     {
-        CostumerDTO CostumerToDTO(Costumer givenCostumer);
+        CostumerOverViewDTO CostumerToCostumerOverViewDTO(Costumer givenCostumer);
         Costumer DTOToCostumer(RegisteringNewCostumerDTO givenCostumerDTO);
-        List<CostumerDTO> ListOfCustomersToDTO(List<Costumer> givenCostumer);
+        List<CostumerDTO> ListOfCustomersToListDTO(List<Costumer> givenListOfCostumer);
+        CostumerDTO CostumerToDTO(Costumer givenCostumer);
     }
 }

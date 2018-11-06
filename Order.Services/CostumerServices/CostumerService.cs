@@ -27,6 +27,17 @@ namespace Order.Services.CostumerServices
             return CustomerDatabase.CostumerDB;
         }
 
+        public Costumer GetSpecificCostumer(Guid costumerGuidID)
+        {
+            try
+            {
+                var costumer = CustomerDatabase.CostumerDB.Single(person => person.Id == costumerGuidID);
+                return costumer;
+            }
+            catch
+            { throw new CostumerException("costumer not found"); }
+        }
+
         public void Register(Costumer newCostumer)
         {
             var doesCostumerMailExist = CustomerDatabase.CostumerDB.Any(DBCostumer => DBCostumer.Email == newCostumer.Email);

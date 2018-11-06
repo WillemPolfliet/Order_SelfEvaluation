@@ -10,7 +10,7 @@ namespace Order.API.Controllers.Costumers.Mapper
 {
     public class CostumerMapper : ICostumerMapper
     {
-        public CostumerDTO CostumerToDTO(Costumer givenCostumer)
+        public CostumerOverViewDTO CostumerToCostumerOverViewDTO(Costumer givenCostumer)
         {
             var address = new CostumerAddressDTO()
             {
@@ -19,7 +19,7 @@ namespace Order.API.Controllers.Costumers.Mapper
                 AddressPostalArea = givenCostumer.Address.PostalArea,
                 AddressPostalCode = givenCostumer.Address.PostalNumber
             };
-            return new CostumerDTO()
+            return new CostumerOverViewDTO()
             {
                 GUID = givenCostumer.Id.ToString(),
                 Firstname = givenCostumer.Firstname,
@@ -31,7 +31,6 @@ namespace Order.API.Controllers.Costumers.Mapper
                 Address = address
             };
         }
-
 
         public Costumer DTOToCostumer(RegisteringNewCostumerDTO givenCostumerDTO)
         {
@@ -50,7 +49,7 @@ namespace Order.API.Controllers.Costumers.Mapper
             );
         }
 
-        public List<CostumerDTO> ListOfCustomersToDTO(List<Costumer> givenListOfCostumer)
+        public List<CostumerDTO> ListOfCustomersToListDTO(List<Costumer> givenListOfCostumer)
         {
             List<CostumerDTO> DTOList = new List<CostumerDTO>();
 
@@ -59,5 +58,18 @@ namespace Order.API.Controllers.Costumers.Mapper
 
             return DTOList;
         }
+
+        public CostumerDTO CostumerToDTO(Costumer givenCostumer)
+        {
+            return new CostumerDTO()
+            {
+                GUID = givenCostumer.Id.ToString(),
+                Name = givenCostumer.Firstname + " " + givenCostumer.LastName,
+                Email = givenCostumer.Email,
+                Role = givenCostumer.Role.ToString(),
+            };
+        }
+
+
     }
 }

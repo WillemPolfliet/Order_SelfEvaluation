@@ -11,5 +11,6 @@ namespace Order.Services.CostumerServices.Interfaces
         void Register(Costumer newCostumer);
         List<Costumer> GetAllCostumers();
         Task<Costumer> Authenticate(string username, string password);
+        Costumer GetSpecificCostumer(Guid costumerGuidID);
     }
 }
