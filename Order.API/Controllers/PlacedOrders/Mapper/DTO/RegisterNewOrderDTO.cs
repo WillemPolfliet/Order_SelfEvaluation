@@ -3,9 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace Order.API.Controllers.OrderItems.Mapper.DTO
+namespace Order.API.Controllers.PlacedOrders.Mapper.DTO
 {
-    public class OrderItemDTO
+    public class RegisterNewOrderDTO
     {
     }
 }

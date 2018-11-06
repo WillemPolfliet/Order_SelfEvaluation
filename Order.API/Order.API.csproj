@@ -5,7 +5,6 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Folder Include="Controllers\OrderItems\Mapper\Interface\" />
     <Folder Include="wwwroot\" />
   </ItemGroup>
 

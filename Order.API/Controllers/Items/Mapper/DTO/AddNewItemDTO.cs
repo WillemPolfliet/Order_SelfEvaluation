@@ -8,7 +8,7 @@ namespace Order.API.Controllers.Items.Mapper.DTO
     public class AddNewItemDTO
     {
         public string Name { get; set; }
-        public float Price { get; set; }
+        public decimal Price { get; set; }
         public int Amount { get; set; }
         public string Description { get; set; }
     }

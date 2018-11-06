@@ -10,10 +10,10 @@ namespace Order.Domain.Items
         public Guid Id { get; }
         public string Name { get; private set; }
         public string Description { get; private set; }
-        public float Price { get; private set; }
-        public int Amount { get; private set; }
+        public decimal Price { get; private set; }
+        public int Amount { get; set; }
 
-        public Item(string name, float price, int amount, string description)
+        public Item(string name, decimal price, int amount, string description)
         {
             CheckValidInput(name, price, amount, description);
 
@@ -24,7 +24,7 @@ namespace Order.Domain.Items
             Amount = amount;
         }
 
-        private void CheckValidInput(string name, float price, int amount, string description)
+        private void CheckValidInput(string name, decimal price, int amount, string description)
         {
             if (string.IsNullOrEmpty(name) || string.IsNullOrEmpty(description))
             { throw new ItemException("All fields are required"); }
